@@ -1,25 +1,20 @@
-#include "globals.h"
+
+#include "population.h"
 #include <iostream>
+#include <time.h>
 
 using namespace std;
-void PrintBoard();
 
 int main(){
-	PrintBoard();
+	srand(time(NULL));
+//	ant *A1 = new ant();
+//	A1->PrintBoard();
+
+//	A1->Evaluate();
+//	A1->PrintBoard();
+	population *Search = new population();
+	ant *A1 = Search->GetBestIndividual();
+	A1->PrintBoard();
 	system("PAUSE");
 	return 0;
-}
-
-void PrintBoard(){
-	for(int y = 0; y < 32; y++){
-		for(int x = 0; x < 32; x++){
-			if(board[y][x] == 0){
-				cout << ".";
-			}
-			else{
-				cout << "x";
-			}
-		}
-		cout << endl;
-	}
 }

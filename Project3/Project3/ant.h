@@ -1,5 +1,8 @@
-#pragma once
+#ifndef _ANT_H
+#define _ANT_H
+
 #include "globals.h"
+#include "node.h"
 #include <stack>
 #include <iostream>
 
@@ -20,12 +23,18 @@ public:
 
 	void Evaluate();
 	int GetFood() { return foodCollected; }
+	void InitBoard();
+	void PrintBoard();
+	void UpdateFace();
 
 private:
+	char curBoard[32][32];
+	char bug;
 	int direction;
 	int x_pos;
 	int y_pos;
 	int foodCollected;
-	//node *root;
+	node *root;
 };
 
+#endif
