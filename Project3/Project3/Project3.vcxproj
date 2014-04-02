@@ -61,12 +61,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ant.h" />
+    <ClInclude Include="GeneticProgram.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="population.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ant.cpp" />
+    <ClCompile Include="GeneticProgram.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="node.cpp" />

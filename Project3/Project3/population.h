@@ -8,7 +8,6 @@ class population
 {
 private:
 	ant *firstPopulation[MAX_POPULATION];
-	ant *secondPopulation[MAX_POPULATION];
 
 	int curIndex;
 
