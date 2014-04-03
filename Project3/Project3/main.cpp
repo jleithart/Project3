@@ -1,5 +1,5 @@
 
-#include "population.h"
+#include "GeneticProgram.h"
 #include <iostream>
 #include <time.h>
 
@@ -12,9 +12,10 @@ int main(){
 
 //	A1->Evaluate();
 //	A1->PrintBoard();
-	population *Search = new population();
-	ant *A1 = Search->GetBestIndividual();
-	A1->PrintBoard();
+	GeneticProgram *GP = new GeneticProgram();
+	GP->Search();
+	//ant *A1 = Search->GetBestIndividual();
+	//A1->PrintBoard();
 	system("PAUSE");
 	return 0;
 }

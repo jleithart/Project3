@@ -21,6 +21,10 @@ ant::~ant(void)
 {
 }
 
+void ant::mutate(){
+	this->root->mutate();
+}
+
 void ant::TurnLeft(){
 	this->direction = ((this->direction+4) + 1) % 4;
 	UpdateFace();
@@ -57,16 +61,42 @@ void ant::MoveForward(){
 		x_pos = ((x_pos+32) + 1) % 32;
 		break;
 	case UP:
-		y_pos = ((x_pos+32) - 1) % 32;
+		y_pos = ((y_pos+32) - 1) % 32;
 		break;
 	case DOWN:
-		y_pos = ((x_pos+32) + 1) % 32;
+		y_pos = ((y_pos+32) + 1) % 32;
 		break;
 	}
 	if(curBoard[this->y_pos][this->x_pos] == 1){
 		this->foodCollected++;
 	}
 	curBoard[y_pos][x_pos] = this->bug;
+}
+
+bool ant::CheckFoodAhead(){
+	switch(this->direction){
+	case LEFT:
+		if(curBoard[y_pos][((x_pos+32) - 1) % 32] == 1){
+			return true;
+		}
+		break;
+	case RIGHT:
+		if(curBoard[y_pos][((x_pos+32) + 1) % 32] == 1){
+			return true;
+		}
+		break;
+	case UP:
+		if(curBoard[((y_pos+32) - 1) % 32][x_pos] == 1){
+			return true;
+		}
+		break;
+	case DOWN:
+		if(curBoard[((y_pos+32) + 1)][x_pos] == 1){
+			return true;
+		}
+		break;
+	}
+	return false;
 }
 
 void ant::Evaluate(){
@@ -88,8 +118,13 @@ void ant::Evaluate(){
 					nodestack.push(n->left);
 					break;
 				case iffood:
-					nodestack.push(n->right);
-					nodestack.push(n->left);
+					if(CheckFoodAhead()){
+						nodestack.push(n->left);
+					}
+					else{
+						nodestack.push(n->right);
+					}
+					
 					break;
 				case type_left:
 					this->TurnLeft();

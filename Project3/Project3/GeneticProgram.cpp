@@ -14,7 +14,7 @@ GeneticProgram::~GeneticProgram(void)
 }
 
 void GeneticProgram::Init(){
-	//searchPop->FillFitness();
+	searchPop->FillFitness();
 }
 
 void GeneticProgram::PrintPopulation(){
@@ -22,7 +22,7 @@ void GeneticProgram::PrintPopulation(){
 }
 
 void GeneticProgram::PrintPopulation(population *pop){
-//	pop->Output();
+	pop->Output();
 }
 
 void GeneticProgram::PrintFitness(){
@@ -33,10 +33,13 @@ void GeneticProgram::Search(){
 	ant *bestAnt = NULL;
 	int bestIndex;
 
+	searchPop->OutputFitness();
+	searchPop->Output();
+	std::cout << std::endl << std::endl;
 	for(int i = 0; i < NUM_GENERATIONS; i++){
-		//selectPop->ResetPopulation();
+		selectPop->ResetPopulation();
 
-		//bestIndex = GetBestIndividual();
+		bestIndex = GetBestIndividualIndex();
 		bestAnt = searchPop->GetIndividual(bestIndex);
 		selectPop->AddIndividual(bestAnt);
 		selectPop->AddIndividual(bestAnt);
@@ -44,7 +47,10 @@ void GeneticProgram::Search(){
 		while(selectPop->curIndex < MAX_POPULATION){
 			Select();
 		}
-
+		selectPop->FillFitness();
+		selectPop->OutputFitness();
+		selectPop->Output();
+		system("PAUSE");
 		CopyPopulation(selectPop, searchPop);
 	}
 }
@@ -54,9 +60,7 @@ void GeneticProgram::GetBestAndAverage(){
 }
 
 void GeneticProgram::CalcFitness(population *pop){
-	for(int i = 0; i < MAX_POPULATION; i++){
-	//	pop->fitnessPopulation[i] = pop->	
-	}
+	pop->FillFitness();
 }
 
 void GeneticProgram::Select(){
@@ -70,12 +74,14 @@ void GeneticProgram::Select(){
 
 	Mutate(firstAnt);
 	Mutate(secondAnt);
+	selectPop->AddIndividual(firstAnt);
+	selectPop->AddIndividual(secondAnt);
 }
 
 int GeneticProgram::GetBestIndividualIndex(){
 	int index = 0;
 	for(int i = 0; i < MAX_POPULATION; i++){
-		if(searchPop->fitnessPopulation[i] < searchPop->fitnessPopulation[index]){
+		if(searchPop->fitnessPopulation[i] > searchPop->fitnessPopulation[index]){
 			index = i;
 		}
 	}
@@ -88,7 +94,7 @@ int GeneticProgram::TourneySelect(){
 
 	for(int i = 0; i < TourneySize; i++){
 		tmpIndex = rand()%MAX_POPULATION;
-		if(searchPop->fitnessPopulation[tmpIndex] < searchPop->fitnessPopulation[winningIndex]){
+		if(searchPop->fitnessPopulation[tmpIndex] > searchPop->fitnessPopulation[winningIndex]){
 			winningIndex = tmpIndex;
 		}
 	}
@@ -102,7 +108,7 @@ void GeneticProgram::Crossover(ant *first, ant *second){
 
 void GeneticProgram::Mutate(ant *ant){
 	// traverse through tree and mutate
-	//ant->root->mutate();
+	ant->mutate();
 
 }
 

@@ -9,10 +9,9 @@ class population
 private:
 	ant *firstPopulation[MAX_POPULATION];
 
-	int curIndex;
-
 
 public:
+	int curIndex;
 	int fitnessPopulation[MAX_POPULATION];
 
 	population(void);
@@ -20,6 +19,15 @@ public:
 
 	void AddIndividual(ant *);
 	ant *GetBestIndividual();
+	ant *GetIndividual(int);
+	void FillFitness();
+	void OutputFitness();
+
+	void ResetPopulation();
+
+	float GetAverageFitness();
+	void Output();
+
 };
 
 #endif

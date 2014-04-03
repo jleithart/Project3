@@ -26,6 +26,9 @@ public:
 	void InitBoard();
 	void PrintBoard();
 	void UpdateFace();
+	void mutate();
+
+	bool CheckFoodAhead();
 
 private:
 	char curBoard[32][32];

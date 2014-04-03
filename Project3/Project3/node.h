@@ -17,6 +17,7 @@ public:
 	node(void);
 	~node(void);
 	void generate(int, node*);
+	void mutate();
 };
 
 #endif
