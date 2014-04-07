@@ -33,8 +33,17 @@ node::~node(void)
 	//this = NULL;
 }
 
-void node::copyTree(){
-
+node * node::copyTree(node *old, node *p){
+	if(old == NULL){
+		return NULL;
+	}
+	node *n = new node();
+	n->parent = p;
+	n->type = old->type;
+	n->left = n->copyTree(old->left, n);
+	n->mid = n->copyTree(old->mid, n);
+	n->right = n->copyTree(old->right, n);
+	return n;
 }
 
 void node::mutate(){

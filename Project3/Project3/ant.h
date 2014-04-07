@@ -28,7 +28,7 @@ public:
 	void UpdateFace();
 	void mutate();
 
-	void CopyAnt(ant *);
+	node *CopyAnt();
 
 	void SetRoot(node * n) {root = n;}
 	node *GetRoot()	{return this->root;}

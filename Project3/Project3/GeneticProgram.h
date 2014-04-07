@@ -1,7 +1,7 @@
 #pragma once
 #include "population.h"
 
-#define NUM_GENERATIONS 500
+#define NUM_GENERATIONS 100
 class GeneticProgram
 {
 private:
@@ -16,8 +16,6 @@ public:
 	void PrintPopulation();
 	void PrintFitness();
 	void Init();
-
-
 
 	GeneticProgram(void);
 	~GeneticProgram(void);

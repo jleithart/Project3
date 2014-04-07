@@ -6,7 +6,7 @@
 using namespace std;
 
 int main(){
-	srand(time(NULL));
+	srand((unsigned)time(NULL));
 //	ant *A1 = new ant();
 //	A1->PrintBoard();
 
@@ -14,8 +14,7 @@ int main(){
 //	A1->PrintBoard();
 	GeneticProgram *GP = new GeneticProgram();
 	GP->Search();
-	//ant *A1 = Search->GetBestIndividual();
-	//A1->PrintBoard();
+	GP->GetBestAndAverage();
 	system("PAUSE");
 	return 0;
 }

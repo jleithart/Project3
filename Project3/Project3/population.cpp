@@ -30,13 +30,18 @@ population::~population(void)
 }
 
 ant *population::GetIndividual(int index){
-	return firstPopulation[index];
+	ant *tmp = new ant();
+	tmp->SetRoot(firstPopulation[index]->CopyAnt());
+	firstPopulation[index]->Evaluate();
+	tmp->Evaluate();
+	return tmp;
+	//return firstPopulation[index];
 }
 
 void population::FillFitness(){
 	for(int i = 0; i < MAX_POPULATION; i++){
 		firstPopulation[i]->Evaluate();
-		std::cout << "i:: " << i << " " << firstPopulation[i]->GetFood() << std::endl;
+		//std::cout << "i:: " << i << " " << firstPopulation[i]->GetFood() << std::endl;
 		fitnessPopulation[i] = firstPopulation[i]->GetFood();
 	}
 }
@@ -51,6 +56,7 @@ void population::ResetPopulation(){
 	for(int i = 0; i < MAX_POPULATION; i++){
 		firstPopulation[i] = NULL;
 		fitnessPopulation[i] = 0;
+		delete firstPopulation[i];
 	}
 }
 
@@ -68,8 +74,8 @@ void population::AddIndividual(ant *i_ant){
 		firstPopulation[curIndex] = i_ant;
 		i_ant->Evaluate();
 		firstPopulation[curIndex]->Evaluate();
-		std::cout << "i_ant:: " << i_ant->GetFood() << std::endl;
-		std::cout << "pop:: " << firstPopulation[curIndex]->GetFood() << std::endl;
+		//std::cout << "i_ant:: " << i_ant->GetFood() << std::endl;
+		//std::cout << "pop:: " << firstPopulation[curIndex]->GetFood() << std::endl;
 		curIndex++;
 	}
 }

@@ -7,10 +7,10 @@
 class population
 {
 private:
-	ant *firstPopulation[MAX_POPULATION];
 
 
 public:
+	ant *firstPopulation[MAX_POPULATION];
 	int curIndex;
 	int fitnessPopulation[MAX_POPULATION];
 

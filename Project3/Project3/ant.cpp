@@ -21,8 +21,10 @@ ant::~ant(void)
 {
 }
 
-void ant::CopyAnt(ant * inputAnt){
-	inputAnt->root->copyTree();
+node * ant::CopyAnt(){
+	node *n = new node();
+	n = this->root->copyTree(root, NULL);
+	return n;
 }
 
 void ant::mutate(){
@@ -42,10 +44,10 @@ void ant::TurnRight(){
 void ant::UpdateFace(){
 	switch(this->direction){
 	case LEFT:
-		this->bug = '>';
+		this->bug = '<';
 		break;
 	case RIGHT:
-		this->bug = '<';
+		this->bug = '>';
 		break;
 	case UP:
 		this->bug = '^';

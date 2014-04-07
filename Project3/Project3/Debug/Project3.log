@@ -1,28 +1,31 @@
-﻿Build started 4/5/2014 11:12:47 AM.
-     1>Project "F:\GitHub Projects\Project3\Project3\Project3\Project3.vcxproj" on node 2 (build target(s)).
+﻿Build started 4/7/2014 12:02:10 PM.
+     1>Project "C:\Users\Jleithart\Documents\GitHub\Project3\Project3\Project3\Project3.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\Project3.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt GeneticProgram.cpp population.cpp
-         population.cpp
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt GeneticProgram.cpp main.cpp
          GeneticProgram.cpp
          Generating Code...
+         Compiling...
+         main.cpp
+     1>c:\users\jleithart\documents\github\project3\project3\project3\main.cpp(9): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+         Generating Code...
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\GitHub Projects\Project3\Project3\Debug\Project3.exe" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Project3.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"F:\GitHub Projects\Project3\Project3\Debug\Project3.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\GitHub Projects\Project3\Project3\Debug\Project3.lib" /MACHINE:X86 Debug\ant.obj
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Jleithart\Documents\GitHub\Project3\Project3\Debug\Project3.exe" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Project3.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Jleithart\Documents\GitHub\Project3\Project3\Debug\Project3.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Jleithart\Documents\GitHub\Project3\Project3\Debug\Project3.lib" /MACHINE:X86 Debug\ant.obj
          Debug\GeneticProgram.obj
          Debug\globals.obj
          Debug\main.obj
          Debug\node.obj
          Debug\population.obj
-         LINK : F:\GitHub Projects\Project3\Project3\Debug\Project3.exe not found or not built by the last incremental link; performing full link
-         Project3.vcxproj -> F:\GitHub Projects\Project3\Project3\Debug\Project3.exe
+         LINK : C:\Users\Jleithart\Documents\GitHub\Project3\Project3\Debug\Project3.exe not found or not built by the last incremental link; performing full link
+         Project3.vcxproj -> C:\Users\Jleithart\Documents\GitHub\Project3\Project3\Debug\Project3.exe
        Manifest:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"F:\GitHub Projects\Project3\Project3\Debug\Project3.exe;#1" /manifest Debug\Project3.exe.intermediate.manifest
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\Jleithart\Documents\GitHub\Project3\Project3\Debug\Project3.exe;#1" /manifest Debug\Project3.exe.intermediate.manifest
        FinalizeBuildStatus:
          Deleting file "Debug\Project3.unsuccessfulbuild".
          Touching "Debug\Project3.lastbuildstate".
-     1>Done Building Project "F:\GitHub Projects\Project3\Project3\Project3\Project3.vcxproj" (build target(s)).
+     1>Done Building Project "C:\Users\Jleithart\Documents\GitHub\Project3\Project3\Project3\Project3.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.86
+Time Elapsed 00:00:02.02

@@ -45,35 +45,26 @@ void GeneticProgram::Search(){
 
 		bestIndex = GetBestIndividualIndex();
 		bestAnt = searchPop->GetIndividual(bestIndex);
-		std::cout << "before eval:: " << bestAnt->GetFood() << std::endl;
 		bestAnt->Evaluate();
-		std::cout << "after eval:: " <<  bestAnt->GetFood() << std::endl;
 		selectPop->AddIndividual(bestAnt);
 		selectPop->AddIndividual(bestAnt);
-		system("PAUSE");
+		//system("PAUSE");
 		while(selectPop->curIndex < MAX_POPULATION){
 			Select();
 		}
-		//selectPop->FillFitness();
-		std::cout << std::endl;
-		//selectPop->OutputFitness();
-		system("PAUSE");
-		/*
-		* SOMETHING IS REALLY GOING WRONG WHEN I EVALUATE
-		* MY GUESS IS THE COPY ISN'T WORKING PROPERLY
-		*/
-		//selectPop->Output();
+		
+		// THIS IS WORKING NOW
 		CopyPopulation(selectPop, searchPop);
-		std::cout << std::endl;
 		searchPop->FillFitness();
-		searchPop->OutputFitness();
-		ComparePopulation();
-		system("PAUSE");
+		
 	}
 }
 
 void GeneticProgram::GetBestAndAverage(){
-	
+	ant *bestAnt = searchPop->GetBestIndividual();
+	std::cout << "The average fitness is " << searchPop->GetAverageFitness() << std::endl;
+	std::cout << "The best fitness is " << bestAnt->GetFood() << std::endl;
+	bestAnt->PrintBoard();
 }
 
 void GeneticProgram::CalcFitness(population *pop){
@@ -100,17 +91,15 @@ void GeneticProgram::Select(){
 	int firstWinnerIndex = TourneySelect();
 	int secondWinnerIndex = TourneySelect();
 
+	//GetIndividual might be shallow copying and that's why we're getting weird results
+	//write a node copy function
 	ant *firstAnt = searchPop->GetIndividual(firstWinnerIndex);
 	ant *secondAnt = searchPop->GetIndividual(secondWinnerIndex);
 
-	Crossover(firstAnt, secondAnt);
+	//Crossover(firstAnt, secondAnt);
 
 	Mutate(firstAnt);
 	Mutate(secondAnt);
-
-	std::cout << "before eval:: " << firstAnt->GetFood() << std::endl;
-	firstAnt->Evaluate();
-	std::cout << "after eval:: " <<  firstAnt->GetFood() << std::endl;
 
 	selectPop->AddIndividual(firstAnt);
 	selectPop->AddIndividual(secondAnt);
@@ -120,12 +109,12 @@ int GeneticProgram::GetBestIndividualIndex(){
 	int index = 0;
 	for(int i = 0; i < MAX_POPULATION; i++){
 		if(searchPop->fitnessPopulation[i] > searchPop->fitnessPopulation[index]){
-			std::cout << "new:: " << searchPop->fitnessPopulation[i] << std::endl;
-			std::cout << "old:: " << searchPop->fitnessPopulation[index] << std::endl;
+			//std::cout << "new:: " << searchPop->fitnessPopulation[i] << std::endl;
+			//std::cout << "old:: " << searchPop->fitnessPopulation[index] << std::endl;
 			index = i;
 		}
 	}
-	system("PAUSE");
+	//system("PAUSE");
 	return index;
 }
 
@@ -145,6 +134,9 @@ int GeneticProgram::TourneySelect(){
 
 void GeneticProgram::Crossover(ant *first, ant *second){
 	//do this
+	//random number % size of first ant
+	//random number % size of second ant
+	//crossover at that node
 }
 
 void GeneticProgram::Mutate(ant *ant){
@@ -170,7 +162,8 @@ ant * GeneticProgram::CopyIndividual(ant * inputAnt, ant *outputAnt){
 
 void GeneticProgram::CopyPopulation(population *i_pop, population *m_pop){
 	for(int i = 0; i < MAX_POPULATION; i++){
-		CopyIndividual(i_pop->GetIndividual(i), m_pop->GetIndividual(i));
+		m_pop->firstPopulation[i] = i_pop->firstPopulation[i];
+		//CopyIndividual(i_pop->GetIndividual(i), m_pop->GetIndividual(i));
 		//m_pop[i] = CopyIndividual(i_pop->GetIndividual(i));
 	}
 }
