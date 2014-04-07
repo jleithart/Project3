@@ -18,6 +18,7 @@ public:
 	~node(void);
 	void generate(int, node*);
 	void mutate();
+	void copyTree();
 };
 
 #endif

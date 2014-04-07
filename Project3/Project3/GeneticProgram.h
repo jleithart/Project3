@@ -9,6 +9,8 @@ private:
 	population *selectPop;
 	int TourneySize;
 
+	void ComparePopulation();
+
 public:
 	void PrintPopulation(population *);
 	void PrintPopulation();
@@ -27,11 +29,13 @@ public:
 	void Crossover(ant *, ant *);
 	void Mutate(ant *);
 
-	void CopyPopulation(const population *, population *);
+	void CopyPopulation(population *, population *);
 	void CalcFitness(population *);
 	void PrintIndividual();
 
 	void GetBestAndAverage();
+
+	ant *CopyIndividual(ant *, ant *);
 
 	ant *GetBest();
 

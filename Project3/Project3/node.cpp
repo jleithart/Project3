@@ -33,6 +33,10 @@ node::~node(void)
 	//this = NULL;
 }
 
+void node::copyTree(){
+
+}
+
 void node::mutate(){
 	int mutateChance = rand()%100;
 	int typeChance = 0;

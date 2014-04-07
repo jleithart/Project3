@@ -28,6 +28,11 @@ public:
 	void UpdateFace();
 	void mutate();
 
+	void CopyAnt(ant *);
+
+	void SetRoot(node * n) {root = n;}
+	node *GetRoot()	{return this->root;}
+
 	bool CheckFoodAhead();
 
 private:

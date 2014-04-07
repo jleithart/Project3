@@ -12,13 +12,17 @@ ant::ant(void)
 	curBoard[0][0] = bug;
 	this->root = new node();
 	this->root->type = prog3;
-	this->root->generate(5, NULL);
+	this->root->generate(4, NULL);
 
 }
 
 
 ant::~ant(void)
 {
+}
+
+void ant::CopyAnt(ant * inputAnt){
+	inputAnt->root->copyTree();
 }
 
 void ant::mutate(){
@@ -53,6 +57,7 @@ void ant::UpdateFace(){
 }
 
 void ant::MoveForward(){
+	curBoard[y_pos][x_pos] = this->bug;
 	switch(this->direction){
 	case LEFT:
 		x_pos = ((x_pos+32) - 1) % 32;
@@ -70,7 +75,6 @@ void ant::MoveForward(){
 	if(curBoard[this->y_pos][this->x_pos] == 1){
 		this->foodCollected++;
 	}
-	curBoard[y_pos][x_pos] = this->bug;
 }
 
 bool ant::CheckFoodAhead(){
@@ -91,7 +95,7 @@ bool ant::CheckFoodAhead(){
 		}
 		break;
 	case DOWN:
-		if(curBoard[((y_pos+32) + 1)][x_pos] == 1){
+		if(curBoard[((y_pos+32) + 1) % 32][x_pos] == 1){
 			return true;
 		}
 		break;
@@ -101,6 +105,14 @@ bool ant::CheckFoodAhead(){
 
 void ant::Evaluate(){
 	int numSteps = 600;
+	this->direction = RIGHT;
+	this->x_pos = 0;
+	this->y_pos = 0;
+	bug = '>';
+	InitBoard();
+	foodCollected = 1;
+	curBoard[0][0] = bug;
+
 	node *n = this->root;
 	std::stack <node *> nodestack;
 	while(numSteps > 0){

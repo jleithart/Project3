@@ -36,12 +36,13 @@ ant *population::GetIndividual(int index){
 void population::FillFitness(){
 	for(int i = 0; i < MAX_POPULATION; i++){
 		firstPopulation[i]->Evaluate();
+		std::cout << "i:: " << i << " " << firstPopulation[i]->GetFood() << std::endl;
 		fitnessPopulation[i] = firstPopulation[i]->GetFood();
 	}
 }
 void population::OutputFitness(){
 	for(int i = 0; i < MAX_POPULATION; i++){
-		std::cout << fitnessPopulation[i] << std::endl;
+		std::cout << "individual " << i << ":: " << fitnessPopulation[i] << std::endl;
 	}
 }
 
@@ -65,6 +66,10 @@ float population::GetAverageFitness(){
 void population::AddIndividual(ant *i_ant){
 	if(curIndex < MAX_POPULATION){
 		firstPopulation[curIndex] = i_ant;
+		i_ant->Evaluate();
+		firstPopulation[curIndex]->Evaluate();
+		std::cout << "i_ant:: " << i_ant->GetFood() << std::endl;
+		std::cout << "pop:: " << firstPopulation[curIndex]->GetFood() << std::endl;
 		curIndex++;
 	}
 }
