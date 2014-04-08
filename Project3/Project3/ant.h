@@ -34,6 +34,9 @@ public:
 	node *GetRoot()	{return this->root;}
 
 	bool CheckFoodAhead();
+	int GetSize() { return root->GetSize(); }
+
+	node *root;
 
 private:
 	char curBoard[32][32];
@@ -42,7 +45,6 @@ private:
 	int x_pos;
 	int y_pos;
 	int foodCollected;
-	node *root;
 };
 
 #endif

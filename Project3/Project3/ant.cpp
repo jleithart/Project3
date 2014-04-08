@@ -121,37 +121,39 @@ void ant::Evaluate(){
 		n = this->root;
 		nodestack.push(n);
 		while(!nodestack.empty()){
-			switch(n->type){
-				case prog3:
-					nodestack.push(n->right);
-					nodestack.push(n->mid);
-					nodestack.push(n->left);
-					break;
-				case prog2:
-					nodestack.push(n->right);
-					nodestack.push(n->left);
-					break;
-				case iffood:
-					if(CheckFoodAhead()){
-						nodestack.push(n->left);
-					}
-					else{
+			if(n != NULL){
+				switch(n->type){
+					case prog3:
 						nodestack.push(n->right);
-					}
+						nodestack.push(n->mid);
+						nodestack.push(n->left);
+						break;
+					case prog2:
+						nodestack.push(n->right);
+						nodestack.push(n->left);
+						break;
+					case iffood:
+						if(CheckFoodAhead()){
+							nodestack.push(n->left);
+						}
+						else{
+							nodestack.push(n->right);
+						}
 					
-					break;
-				case type_left:
-					this->TurnLeft();
-					numSteps--;
-					break;
-				case type_right:
-					this->TurnRight();
-					numSteps--;
-					break;
-				case forward:
-					this->MoveForward();
-					numSteps--;
-					break;
+						break;
+					case type_left:
+						this->TurnLeft();
+						numSteps--;
+						break;
+					case type_right:
+						this->TurnRight();
+						numSteps--;
+						break;
+					case forward:
+						this->MoveForward();
+						numSteps--;
+						break;
+				}
 			}
 			n = nodestack.top();
 			nodestack.pop();

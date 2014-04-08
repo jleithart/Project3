@@ -35,10 +35,11 @@ void GeneticProgram::Search(){
 	int bestIndex;
 
 	
+	debugFile.open("debug.txt");
 	searchPop->FillFitness();
 	searchPop->OutputFitness();
 	std::cout << std::endl;
-	system("PAUSE");
+	//system("PAUSE");
 
 	for(int i = 0; i < NUM_GENERATIONS; i++){
 		selectPop->ResetPopulation();
@@ -56,8 +57,13 @@ void GeneticProgram::Search(){
 		// THIS IS WORKING NOW
 		CopyPopulation(selectPop, searchPop);
 		searchPop->FillFitness();
+		if(i % 5 == 0){
+			bestAnt = searchPop->GetBestIndividual();
+			debugFile << i << " " << searchPop->GetAverageFitness() << " " << bestAnt->GetFood() << std::endl;
+		}
 		
 	}
+	debugFile.close();
 }
 
 void GeneticProgram::GetBestAndAverage(){
@@ -65,6 +71,7 @@ void GeneticProgram::GetBestAndAverage(){
 	std::cout << "The average fitness is " << searchPop->GetAverageFitness() << std::endl;
 	std::cout << "The best fitness is " << bestAnt->GetFood() << std::endl;
 	bestAnt->PrintBoard();
+	//bestAnt->root->PrintTree(bestAnt->root);
 }
 
 void GeneticProgram::CalcFitness(population *pop){
@@ -96,7 +103,7 @@ void GeneticProgram::Select(){
 	ant *firstAnt = searchPop->GetIndividual(firstWinnerIndex);
 	ant *secondAnt = searchPop->GetIndividual(secondWinnerIndex);
 
-	//Crossover(firstAnt, secondAnt);
+	Crossover(firstAnt, secondAnt);
 
 	Mutate(firstAnt);
 	Mutate(secondAnt);
@@ -134,9 +141,95 @@ int GeneticProgram::TourneySelect(){
 
 void GeneticProgram::Crossover(ant *first, ant *second){
 	//do this
-	//random number % size of first ant
-	//random number % size of second ant
-	//crossover at that node
+	int firstNodeNum = rand() % first->GetSize();
+	node *firstNode = first->root;
+
+	std::stack<node *> firstStack;
+	firstStack.push(firstNode);
+	while(firstNodeNum > 0 && !firstStack.empty()){
+		if(firstNode->left != NULL){
+			firstStack.push(firstNode->left);
+		}
+		if(firstNode->mid != NULL){
+			firstStack.push(firstNode->mid);
+		}
+		if(firstNode->right != NULL){
+			firstStack.push(firstNode->right);
+		}
+
+		firstNode = firstStack.top();
+		firstStack.pop();
+		firstNodeNum--;
+	}
+	while(!firstStack.empty()){
+		firstStack.pop();
+	}
+
+	//firstNode should be a random node
+	//do the same with second node
+	node *secondNode = second->root;
+	int secondNodeNum = rand() % second->GetSize();
+
+	std::stack<node *> secondStack;
+	secondStack.push(secondNode);
+	while(secondNodeNum > 0 && !secondStack.empty()){
+		if(secondNode->left != NULL){
+			secondStack.push(secondNode->left);
+		}
+		if(secondNode->mid != NULL){
+			secondStack.push(secondNode->mid);
+		}
+		if(secondNode->right != NULL){
+			secondStack.push(secondNode->right);
+		}
+
+		secondNode = secondStack.top();
+		secondStack.pop();
+		secondNodeNum--;
+	}
+	while(!secondStack.empty()){
+		secondStack.pop();
+	}
+
+	//now we have both subtree nodes to swap
+	node *tmpNode = firstNode->copyTree(firstNode, firstNode->parent);
+	firstNode = firstNode->copyTree(secondNode, firstNode->parent);
+	secondNode = secondNode->copyTree(tmpNode, secondNode->parent);
+
+	//make sure the parent has the right spot
+	if(firstNode->parent != NULL){
+		switch(firstNode->loc){
+			case nleft:
+				firstNode->parent->left = firstNode;
+				break;
+			case nmid:
+				firstNode->parent->mid = firstNode;
+				break;
+			case nright:
+				firstNode->parent->right = firstNode;
+				break;
+		}
+	}
+	else{
+		firstNode->loc = root;
+	}
+	if(secondNode->parent != NULL){
+		switch(secondNode->loc){
+			case nleft:
+				secondNode->parent->left = secondNode;
+				break;
+			case nmid:
+				secondNode->parent->mid = secondNode;
+				break;
+			case nright:
+				secondNode->parent->right = secondNode;
+				break;
+		}
+	}
+	else{
+		secondNode->loc = root;
+	}
+
 }
 
 void GeneticProgram::Mutate(ant *ant){

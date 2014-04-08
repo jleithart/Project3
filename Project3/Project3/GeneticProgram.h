@@ -1,13 +1,16 @@
 #pragma once
 #include "population.h"
+#include <fstream>
 
-#define NUM_GENERATIONS 100
+#define NUM_GENERATIONS 250
 class GeneticProgram
 {
 private:
 	population *searchPop;
 	population *selectPop;
 	int TourneySize;
+
+	std::ofstream debugFile;
 
 	void ComparePopulation();
 
